@@ -11,13 +11,13 @@
 #
 # Happy Coding!
 
-service: serverless-zip-s3
+service: ruukfy-zip-s3
 
 frameworkVersion: "3"
 
 provider:
   name: aws
-  region: ap-northeast-1
+  region: eu-west-3
   runtime: nodejs14.x
   stage: ${opt:stage,'local'}
   iam:
@@ -34,6 +34,12 @@ provider:
 functions:
   app:
     handler: src/handler.app
+
+  dispatch: 
+    handler: src/handler.dispatch
+    events:
+      - sns:
+          arn: FILLWITHYOURSNSARN
 
 custom:
   stages:
