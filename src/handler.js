@@ -117,6 +117,13 @@ module.exports.app = async (event, context, callback) => {
     };
 };
 
+module.exports.dispatch = async (event, context, callback) => {
+    
+    var message = JSON.parse(event.Records[0].Sns.Message);
+
+    return this.app(message, context, callback);
+}
+
 const listObjects = async (bucket, prefix) => {
     console.log(`listObjects: ${bucket}, ${prefix}`);
     let params = {
